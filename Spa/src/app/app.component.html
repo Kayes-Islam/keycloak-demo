@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">auth-demo-spa</span>
+        <div class="collapse navbar-collapse">
+            <div class="nav-item">
+                <a *ngIf="isAuthenticated$ | async; else notAuthenticated" class="nav-link active" (click)="logout()">Logout</a>
+                <ng-template #notAuthenticated>
+                    <a class="nav-link active" (click)="login()">Login</a>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,19 @@
+<div *ngIf="isAuthenticated$ | async; else notAuthenticated">
+    <div>Logged In.</div>
+    <div>
+        <pre>{{ userData$ | async | json }}</pre>
+    </div>
+</div>
+<ng-template #notAuthenticated>
+    <div>Not logged in.</div>
+</ng-template>
+<div>
+    <button class="btn btn-primary" (click)="callApi()">Call API</button>
+    <div *ngIf="data">
+        <pre>{{ data | json }}</pre>
+    </div>
+
+    <div *ngIf="error" class="text-danger">
+        <pre>{{ error | json }}</pre>
+    </div>
+</div>
