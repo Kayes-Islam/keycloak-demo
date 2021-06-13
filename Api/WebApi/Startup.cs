@@ -32,13 +32,17 @@ namespace WebApi
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
-                x.MetadataAddress = "http://localhost:8080/auth/realms/AuthDemoRealm/.well-known/openid-configuration";
+                x.MetadataAddress = "http://keycloak:8080/auth/realms/AuthDemoRealm/.well-known/openid-configuration";
                 x.RequireHttpsMetadata = false; // only for dev
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    //ValidIssuer = "",
+                    // NOTE: Usually you don't need to set the issuer since the middleware will extract it 
+                    // from the .well-known endpoint provided above. but since I am using the container name in
+                    // the above URL which is not what is published issueer by the well-known, I'm setting it here.
+                    ValidIssuer = "http://localhost:8080/auth/realms/AuthDemoRealm", 
+                    
                     ValidAudience = "auth-demo-web-api",
                     ValidateAudience = true,
                     ValidateLifetime = true,

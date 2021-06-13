@@ -10,3 +10,13 @@ services:
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
+  api:
+    build:
+      context: ./Api
+    ports: 
+      - "5000:80"
+  spa:
+    build:
+      context: ./Spa
+    ports: 
+      - "4200:4200"
